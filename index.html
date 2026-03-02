@@ -249,14 +249,19 @@
             
             <div class="max-w-xl mx-auto glass-card p-8 mb-12 reveal">
                 <form id="contactForm" class="space-y-4 text-left">
-                    <input type="text" placeholder="Full Name" required class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
-                    <input type="tel" placeholder="Phone Number" required class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
-                    <select class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
+                    <input type="text" id="form-name" placeholder="Full Name" required class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
+                    <input type="tel" id="form-phone" placeholder="Phone Number" required class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
+                    <select id="form-service" class="w-full bg-black/50 border border-gray-700 p-3 rounded-lg focus:border-red-500 outline-none">
                         <option value="">Select Service</option>
-                        <option>Exterior Car Wash</option>
-                        <option>Interior Deep Cleaning</option>
-                        <option>Full Detailing</option>
-                        <option>Ceramic Coating</option>
+                        <option value="Exterior Car Wash">Exterior Car Wash</option>
+                        <option value="Interior Deep Cleaning">Interior Deep Cleaning</option>
+                        <option value="Full Detailing">Full Detailing</option>
+                        <option value="Ceramic Coating">Ceramic Coating</option>
+                        <option value="Engine Cleaning">Engine Cleaning</option>
+                        <option value="AC Servicing">AC Servicing</option>
+                        <option value="Wheel Alignment">Wheel Alignment</option>
+                        <option value="Denting & Painting">Denting & Painting</option>
+                        <option value="Roadside Assistance">Roadside Assistance</option>
                     </select>
                     <button type="submit" id="submitBtn" class="w-full bg-red-600 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors uppercase tracking-widest">
                         Submit Request
@@ -335,11 +340,19 @@
                 <p class="text-gray-400 text-sm mb-4">${s.desc}</p>
                 <div class="flex justify-between items-center mt-4">
                     <span class="text-xl font-bold text-red-600">${s.price}</span>
-                    <button class="bg-white/10 hover:bg-red-600 px-4 py-1 rounded-full text-xs transition-all">Book Now</button>
+                    <a href="#contact" onclick="selectService('${s.name}')" class="bg-white/10 hover:bg-red-600 px-4 py-1 rounded-full text-xs transition-all inline-block">Book Now</a>
                 </div>
             `;
             servicesGrid.appendChild(card);
         });
+
+        // Function to handle service selection and scroll
+        function selectService(serviceName) {
+            const dropdown = document.getElementById('form-service');
+            if (dropdown) {
+                dropdown.value = serviceName;
+            }
+        }
 
         // Intersection Observer for Reveal
         const observerOptions = { threshold: 0.1 };
